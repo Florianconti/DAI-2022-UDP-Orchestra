@@ -106,75 +106,75 @@ Reminder: answer the following questions [here](https://forms.gle/6SM7cu4cYhNsRv
 | #        | Topic                                                                                                                                                                   |
 | -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Question | How can we represent the system in an **architecture diagram**, which gives information both about the Docker containers, the communication protocols and the commands? |
-|          | _Insert your diagram here..._                                                                                                                                           |
+|          | ![diagram](images/diagram.png)                                                                                                                                           |
 | Question | Who is going to **send UDP datagrams** and **when**?                                                                                                                    |
-|          | _Enter your response here..._                                                                                                                                           |
+|          | The musicians will send a UDP datagrams every seconds on the multicast address.                                                                                                                                           |
 | Question | Who is going to **listen for UDP datagrams** and what should happen when a datagram is received?                                                                        |
-|          | _Enter your response here..._                                                                                                                                           |
+|          | It's the auditor who listens to the udp traffic and updates the datas when it receives a datagram                                                                                                                                         |
 | Question | What **payload** should we put in the UDP datagrams?                                                                                                                    |
-|          | _Enter your response here..._                                                                                                                                           |
+|          | We should put the id of the musician and the instruments that he played.                                                                                                                                          |
 | Question | What **data structures** do we need in the UDP sender and receiver? When will we update these data structures? When will we query these data structures?                |
-|          | _Enter your response here..._                                                                                                                                           |
+|          | A map to store the id of each musicians and their instruments. We update the map each time there is a new musician or when a musician leaves.                                                                                                                                         |
 
 ## Task 2: implement a "musician" Node.js application
 
 | #        | Topic                                                                               |
 | -------- | ----------------------------------------------------------------------------------- |
 | Question | In a JavaScript program, if we have an object, how can we **serialize it in JSON**? |
-|          | _Enter your response here..._                                                       |
+|          | We can use the JSON.stringify() method.                                                      |
 | Question | What is **npm**?                                                                    |
-|          | _Enter your response here..._                                                       |
+|          | It's a package manager.                                                       |
 | Question | What is the `npm install` command?                                                  |
-|          | _Enter your response here..._                                                       |
+|          | It install a package and its dependencies.                                                       |
 | Question | How can we use the `https://www.npmjs.com/` web site?                               |
-|          | _Enter your response here..._                                                       |
+|          | We can search for packages and then use the command npm install to use it.                                                      |
 | Question | In JavaScript, how can we **generate a UUID** compliant with RFC4122?               |
-|          | _Enter your response here..._                                                       |
+|          | There is a package on npmjs called uuid that allows us to generate uuid.                                                       |
 | Question | In Node.js, how can we execute a function on a **periodic** basis?                  |
-|          | _Enter your response here..._                                                       |
+|          | With the setInterval() function. We have to tell wich function will be called and in which timeout.                                                      |
 | Question | In Node.js, how can we **emit UDP datagrams**?                                      |
-|          | _Enter your response here..._                                                       |
+|          | With the library called dgram.                                                       |
 | Question | In Node.js, how can we **access the command line arguments**?                       |
-|          | _Enter your response here..._                                                       |
+|          | By using process.argv that return an array of arguments.                                                     |
 
 ## Task 3: package the "musician" app in a Docker image
 
 | #        | Topic                                                                               |
 | -------- | ----------------------------------------------------------------------------------- |
 | Question | How do we **define and build our own Docker image**?                                |
-|          | _Enter your response here..._                                                       |
+|          | We have to make a Dockerfile and then build it with the command docker build -t name .                                                       |
 | Question | How can we use the `ENTRYPOINT` statement in our Dockerfile?                        |
-|          | _Enter your response here..._                                                       |
+|          | With the command ENTRYPOINT[arguments].                                                       |
 | Question | After building our Docker image, how do we use it to **run containers**?            |
-|          | _Enter your response here..._                                                       |
+|          | By using the command "docker run <name> <instrument>".                                                        |
 | Question | How do we get the list of all **running containers**?                               |
-|          | _Enter your response here..._                                                       |
+|          | With the command docker ps                                                      |
 | Question | How do we **stop** and **kill** one running container?                              |
-|          | _Enter your response here..._                                                       |
+|          | With the command docker stop <name>.                                                      |
 | Question | How can we check that our running containers are effectively sending UDP datagrams? |
-|          | _Enter your response here..._                                                       |
+|          | We used log on the server and client side to tell when a datagram is send.                                                      |
 
 ## Task 4: implement an "auditor" Node.js application
 
 | #        | Topic                                                                                              |
 | -------- | -------------------------------------------------------------------------------------------------- |
 | Question | With Node.js, how can we listen for UDP datagrams in a multicast group?                            |
-|          | _Enter your response here..._                                                                      |
+|          | By creating a socket, then binding it on a specific port and then by using the listen function.                                                                      |
 | Question | How can we use the `Map` built-in object introduced in ECMAScript 6 to implement a **dictionary**? |
-|          | _Enter your response here..._                                                                      |
+|          | By using a constant to store <key><values> datas. That will allow us to use a "dictionary".                                                                    |
 | Question | How can we use the `Day.js` npm module to help us with **date manipulations** and formatting?      |
-|          | _Enter your response here..._                                                                      |
+|          | It can help us to manipulate date.                                                                      |
 | Question | When and how do we **get rid of inactive players**?                                                |
-|          | _Enter your response here..._                                                                      |
+|          | We remove the musician of the map if there is no datagram received since 4 seconds by the musician.                                                                       |
 | Question | How do I implement a **simple TCP server** in Node.js?                                             |
-|          | _Enter your response here..._                                                                      |
+|          | With the "net" module. It allows us to create TCP server by setting the listening IP and a specific port.                                                                     |
 
 ## Task 5: package the "auditor" app in a Docker image
 
 | #        | Topic                                                                                |
 | -------- | ------------------------------------------------------------------------------------ |
 | Question | How do we validate that the whole system works, once we have built our Docker image? |
-|          | _Enter your response here..._                                                        |
+|          | By using the script "validate.sh". It will do some operations like running a auditor container and some musicians containers.                                                      |
 
 ## Constraints
 
