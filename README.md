@@ -142,39 +142,39 @@ Reminder: answer the following questions [here](https://forms.gle/6SM7cu4cYhNsRv
 | #        | Topic                                                                               |
 | -------- | ----------------------------------------------------------------------------------- |
 | Question | How do we **define and build our own Docker image**?                                |
-|          | _Enter your response here..._                                                       |
+|          | We have to make a Dockerfile and then build it with the command docker build -t name .                                                       |
 | Question | How can we use the `ENTRYPOINT` statement in our Dockerfile?                        |
-|          | _Enter your response here..._                                                       |
+|          | With the command ENTRYPOINT[arguments].                                                       |
 | Question | After building our Docker image, how do we use it to **run containers**?            |
-|          | _Enter your response here..._                                                       |
+|          | By using the command "docker run <name> <instrument>".                                                        |
 | Question | How do we get the list of all **running containers**?                               |
-|          | _Enter your response here..._                                                       |
+|          | With the command docker ps                                                      |
 | Question | How do we **stop** and **kill** one running container?                              |
-|          | _Enter your response here..._                                                       |
+|          | With the command docker stop <name>.                                                      |
 | Question | How can we check that our running containers are effectively sending UDP datagrams? |
-|          | _Enter your response here..._                                                       |
+|          | We used log on the server and client side to tell when a datagram is send.                                                      |
 
 ## Task 4: implement an "auditor" Node.js application
 
 | #        | Topic                                                                                              |
 | -------- | -------------------------------------------------------------------------------------------------- |
 | Question | With Node.js, how can we listen for UDP datagrams in a multicast group?                            |
-|          | _Enter your response here..._                                                                      |
+|          | By creating a socket, then binding it on a specific port and then by using the listen function.                                                                      |
 | Question | How can we use the `Map` built-in object introduced in ECMAScript 6 to implement a **dictionary**? |
-|          | _Enter your response here..._                                                                      |
+|          | By using a constant to store <key><values> datas. That will allow us to use a "dictionary".                                                                    |
 | Question | How can we use the `Day.js` npm module to help us with **date manipulations** and formatting?      |
-|          | _Enter your response here..._                                                                      |
+|          | It can help us to manipulate date.                                                                      |
 | Question | When and how do we **get rid of inactive players**?                                                |
-|          | _Enter your response here..._                                                                      |
+|          | We remove the musician of the map if there is no datagram received since 4 seconds by the musician.                                                                       |
 | Question | How do I implement a **simple TCP server** in Node.js?                                             |
-|          | _Enter your response here..._                                                                      |
+|          | With the "net" module. It allows us to create TCP server by setting the listening IP and a specific port.                                                                     |
 
 ## Task 5: package the "auditor" app in a Docker image
 
 | #        | Topic                                                                                |
 | -------- | ------------------------------------------------------------------------------------ |
 | Question | How do we validate that the whole system works, once we have built our Docker image? |
-|          | _Enter your response here..._                                                        |
+|          | By using the script "validate.sh". It will do some operations like running a auditor container and some musicians containers.                                                      |
 
 ## Constraints
 
