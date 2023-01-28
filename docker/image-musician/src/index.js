@@ -1,4 +1,10 @@
-const entries = [
+import { v4 as uuidv4 } from 'uuid'
+
+import dgram from "dgram"
+
+const dg = dgram.createSocket("udp4")
+
+const instruments = [
 	["piano", "ti-ta-ti"],
 	["trumpet", "pouet"],
 	["flute", "trulu"],
@@ -12,14 +18,8 @@ const PROTOCOL = {
 	TCP_INTERFACE_ADDR: "0.0.0.0",
 	TCP_INTERFACE_PORT: 2205,
 	TIMEOUT: 4000,
-	INSTRUMENTS: new Map(entries)
+	INSTRUMENTS: new Map(instruments)
 }
-
-import { v4 as uuidv4 } from 'uuid'
-
-import dgram from "dgram"
-
-const s = dgram.createSocket("udp4")
 
 let message = {
 	uuid: uuidv4(),
@@ -28,12 +28,12 @@ let message = {
 
 let payload = JSON.stringify(message);
 
-function sendSound() {
-	s.send(payload, PROTOCOL.PORT, PROTOCOL.MULTICAST_ADDRESS, () => {
-		console.log("Sending payload: " + payload + " via port " + s.address().port);
+function sendInstrumentSound() {
+	dg.send(payload, PROTOCOL.PORT, PROTOCOL.MULTICAST_ADDRESS, () => {
+		console.log("Sending: " + payload + " from port: " + dg.address().port);
 	});
 }
 
-sendSound()
+sendInstrumentSound()
 
-setInterval(sendSound, 1000)
+setInterval(sendInstrumentSound, 1000)

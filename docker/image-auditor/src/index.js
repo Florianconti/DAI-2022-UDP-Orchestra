@@ -3,7 +3,7 @@ import net from "net"
 
 const socket = dgram.createSocket("udp4")
 
-const entries = [
+const instruments = [
 	["piano", "ti-ta-ti"],
 	["trumpet", "pouet"],
 	["flute", "trulu"],
@@ -17,7 +17,7 @@ const PROTOCOL = {
 	TCP_INTERFACE_ADDR: "0.0.0.0",
 	TCP_INTERFACE_PORT: 2205,
 	TIMEOUT: 4000,
-	INSTRUMENTS: new Map([...entries].map(e => e.reverse()))
+	INSTRUMENTS: new Map([...instruments].map(e => e.reverse()))
 }
 
 let musician = new Map();
@@ -38,32 +38,31 @@ socket.on('message', function(msg, source) {
 
 	musician.set(uuid, {uuid: uuid, instrument: instrument, activeSince: musician.has(uuid) ? musician.get(uuid).activeSince : date, lastActive: date})
 
-	console.log("Data has arrived " + msg + " Source port: " + source.port)
+	console.log("New data: " + msg + " From source port: " + source.port)
 });
 
 const server = net.createServer()
 
 server.listen(PROTOCOL.TCP_INTERFACE_PORT, () => {
-	console.log("TCP server is running on port " + PROTOCOL.TCP_INTERFACE_PORT)
-}).on('connection', (conn) => {
-	console.log("CONNECTED: " + conn.remoteAddress + ":" + conn.remotePort)
+	console.log("Listening for connection on port: " + PROTOCOL.TCP_INTERFACE_PORT + "...")
+}).on('connection', (connection) => {
+	console.log("CONNECTED: " + connection.remoteAddress + ":" + connection.remotePort)
 
-	const date = Date.now()
 	const res = Array.from(musician.entries()).filter(([uuid, musician]) => {
-		let removed = date - musician.lastActive > PROTOCOL.TIMEOUT
-		if(removed) {
+		let inactive = Date.now() - musician.lastActive > PROTOCOL.TIMEOUT
+		if(inactive) {
 			musician.delete(uuid)
 		}
-		return !removed
+		return !inactive
 	}).map(([uuid, musician]) => ({
 		uuid,
 		instrument: musician.instrument,
 		activeSince: new Date(musician.activeSince)
 	}))
 
-	conn.write(JSON.stringify(res))
+	connection.write(JSON.stringify(res))
 
-	conn.end()
-}).on('error', (conn) => {
+	connection.end()
+}).on('error', (connection) => {
 	console.log;
 });
