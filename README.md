@@ -106,7 +106,7 @@ Reminder: answer the following questions [here](https://forms.gle/6SM7cu4cYhNsRv
 | #        | Topic                                                                                                                                                                   |
 | -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Question | How can we represent the system in an **architecture diagram**, which gives information both about the Docker containers, the communication protocols and the commands? |
-|          | _Insert your diagram here..._                                                                                                                                           |
+|          | ![diagram](images/diagram.png)                                                                                                                                           |
 | Question | Who is going to **send UDP datagrams** and **when**?                                                                                                                    |
 |          | The musicians will send a UDP datagrams every seconds on the multicast address.                                                                                                                                           |
 | Question | Who is going to **listen for UDP datagrams** and what should happen when a datagram is received?                                                                        |
