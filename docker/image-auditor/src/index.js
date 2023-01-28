@@ -16,7 +16,7 @@ const PROTOCOL = {
 	PORT: 9907,
 	TCP_INTERFACE_ADDR: "0.0.0.0",
 	TCP_INTERFACE_PORT: 2205,
-	TIMEOUT: 5000,
+	TIMEOUT: 4000,
 	INSTRUMENTS: new Map([...entries].map(e => e.reverse()))
 }
 
