@@ -1,6 +1,6 @@
 import { v4 as uuidv4 } from 'uuid'
 
-import dgram from "dgram"
+import dgram from 'dgram'
 
 const dg = dgram.createSocket("udp4")
 
@@ -15,9 +15,6 @@ const instruments = [
 const PROTOCOL = {
 	MULTICAST_ADDRESS: "239.255.22.5",
 	PORT: 9907,
-	TCP_INTERFACE_ADDR: "0.0.0.0",
-	TCP_INTERFACE_PORT: 2205,
-	TIMEOUT: 4000,
 	INSTRUMENTS: new Map(instruments)
 }
 
@@ -30,7 +27,7 @@ let payload = JSON.stringify(message);
 
 function sendInstrumentSound() {
 	dg.send(payload, PROTOCOL.PORT, PROTOCOL.MULTICAST_ADDRESS, () => {
-		console.log("Sending: " + payload + " from port: " + dg.address().port);
+		console.log("Sending: " + payload + " via port: " + dg.address().port);
 	});
 }
 
